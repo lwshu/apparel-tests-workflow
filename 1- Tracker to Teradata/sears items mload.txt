@@ -1,0 +1,44 @@
+.LogTable shc_work_tbls.new_tableLog_srsstore;
+
+.LOGON edwprod1.intra.searshc.com/lshu0, slw1234;
+
+
+.begin import mload tables shc_work_tbls.sears_all_items
+ERRLIMIT 1
+SESSIONS 5;
+
+.layout InputFile_Layout;
+
+.field wk_no* varchar(25);
+.field div_no* varchar(25);
+.field itm_no* varchar(25);
+.field test_nm* varchar(25);
+
+
+.dml label InsertDML;
+
+insert into shc_work_tbls.sears_all_items.*;
+
+.import infile "C:\BTEQ\all_item_sears.txt"
+format vartext  ','
+display errors
+from 1
+layout InputFile_Layout
+apply InsertDML;
+.end mload;
+.logoff;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
